@@ -76,7 +76,7 @@ const singlyLinkedListHeadConstructorHandler = {
       argumentsList.push(null);
     }
     const [next] = argumentsList;
-    const obj = new target(next);
+    const obj = new target(null);
     obj.name = '';
     if (next !== null) {
       next[parent] = obj;
@@ -89,6 +89,9 @@ const singlyLinkedListHeadConstructorHandler = {
     defineVuaAttributes(obj, vuaAttributes);
     const proxy = new Proxy(obj, singlyLinkedListHeadObjectHandler);
     tracers.push(obj);
+    if (next !== null) {
+      proxy.next = next;
+    }
     return proxy;
   }
 };
