@@ -41,6 +41,7 @@ function Display({snapshot, width, x, y}) {
       <div 
         style={{width:width}}
         id='control'>
+        <a href="https://github.com/belzhong/visual-your-algo">使用说明</a>
         <Control/>
       </div>
     </>
