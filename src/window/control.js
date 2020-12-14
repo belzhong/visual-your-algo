@@ -52,24 +52,32 @@ function Control(props) {
   return (
     <footer id='control'>
       <Upload {...config}>
-        <Button icon={<UploadOutlined />}>Click to Upload</Button>
+        <Button icon={<UploadOutlined />}>上传代码</Button>
       </Upload>
       <Button
-          type="primary"
-          icon={<StepBackwardOutlined />}
-          onClick={ () => prev(pointer, dispatch, 1) }
-          disabled={playing}
-        />
-      <Button
-          type="primary"
-          icon={playing ? <PauseCircleOutlined /> : <PlayCircleOutlined />}
-          onClick={ () => dispatch(playing ? stop() : start()) }/>
-      <Button
-          type="primary"
-          icon={<StepForwardOutlined />}
-          onClick={ () => next(snapshots, pointer, dispatch, 1) }
-          disabled={playing}
+        style={{marginLeft: 3}}
+        type="primary"
+        icon={<StepBackwardOutlined />}
+        onClick={ () => prev(pointer, dispatch, 1) }
+        disabled={playing}
       />
+      <Button
+        style={{marginLeft: 3}}
+        type="primary"
+        icon={playing ? <PauseCircleOutlined /> : <PlayCircleOutlined />}
+        onClick={ () => dispatch(playing ? stop() : start()) }/>
+      <Button
+        style={{marginLeft: 3}}
+        type="primary"
+        icon={<StepForwardOutlined />}
+        onClick={ () => next(snapshots, pointer, dispatch, 1) }
+        disabled={playing}
+      />
+      <a 
+        style={{marginLeft: 3}}
+        target={'_blank'}
+        rel={'noreferrer'}
+        href="https://github.com/belzhong/visual-your-algo">使用说明</a>
       <div>
         <Slider 
           onChange={value => {
