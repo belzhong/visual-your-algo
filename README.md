@@ -1,1 +1,1 @@
-# Visual yUor Algo
+# visual yuor algo
