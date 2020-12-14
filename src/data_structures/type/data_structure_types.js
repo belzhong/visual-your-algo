@@ -1,0 +1,13 @@
+export const variable = 'VARIABLE';
+export const vector = 'VECTOR';
+export const matrix = 'MATRIX';
+export const singlyLinkedListNode = 'SINGLY_LINKED_LIST_NODE';
+export const singlyLinkedListHead = 'SINGLY_LINKED_LIST_HEAD';
+export const mAryTreeNode = 'M_ARY_TREE_NODE';
+export const mAryTreeHead = 'M_ARY_TREE_HEAD';
+export const orphanage = 'ORPHANAGE';
+export const map = 'MAP';
+export const set = 'SET';
+export const binaryTreeNode = 'BINARY_TREE_NODE';
+export const binaryTreeHead = 'BINARY_TREE_HEAD';
+export const graph = 'GRAPH';

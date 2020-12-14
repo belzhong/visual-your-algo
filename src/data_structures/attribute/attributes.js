@@ -1,0 +1,9 @@
+export const original = '__ORIGINAL';
+export const dataType = '__DATA_TYPE';
+export const index = '__INDEX';
+export const rowIndex = '__ROW_INDEX';
+export const parent = Symbol.for('__PARENT');
+export const parentIndex = '__PARENT_INDEX';
+export const directed = '__DIRECTED';
+export const weighted = '__WEIGHTED';
+export const binaryPosition = '___BINARY_POSITION';
