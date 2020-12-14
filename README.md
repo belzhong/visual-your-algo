@@ -56,3 +56,69 @@ visual your algo(下称vua)主要是用于从自定义的代码中把算法运�
 ```
 以上代码就可以提交到vua网站观察效果了 运行效果如下
 ![demo](./public/demo.gif)
+
+# API
+
+## vuaVector
+  vuaVector, 该容器实际上是Array类型加了代理后得到的 所以该容器可以当成Array来用 其初始化方法也和Array类型一致 但是该方法仅支持使用new初始化 这个容器以[TopK问题作为例子](https://leetcode-cn.com/problems/zui-xiao-de-kge-shu-lcof/) 我们将该题的一个[ac代码](https://xxoo521.com/2020-02-21-least-nums/)重写为以下形式
+```javascript
+  function partiton(arr, start, end) {
+    const k = arr[start];
+    let left = start + 1,
+        right = end;
+    while (1) {
+      while (left <= end && arr[left] <= k) ++left;
+      while (right >= start + 1 && arr[right] >= k) --right;
+
+      if (left >= right) {
+        break;
+      }
+
+      [arr[left], arr[right]] = [arr[right], arr[left]];
+      ++left;
+      --right;
+    }
+    [arr[right], arr[start]] = [arr[start], arr[right]];
+    return right;
+  }
+
+  var getLeastNumbers = function (arr, k) {
+    const length = arr.length;
+    if (k >= length) return arr;
+    let left = 0,
+        right = length - 1;
+    let index = partiton(arr, left, right);
+    while (index !== k) {
+      if (index < k) {
+        left = index + 1;
+        index = partiton(arr, left, right);
+      } else if (index > k) {
+        right = index - 1;
+        index = partiton(arr, left, right);
+      }
+    }
+
+    return arr.slice(0, k);
+  };
+
+  //###############################################################
+  const data = new vuaVector(...[89, 19, 95, 40, 153, 134, 128, 182, 183, 61, 180, 62, 107, 147, 65, 108, 47, 20, 5,  7]);
+  getLeastNumbers(data, 7);
+  //###############################################################
+```
+我们仅仅添加了最后两行被#包围的两行代码 其余代码与原作者保持一致
+
+## vuaMatrix
+  vuaMatrix, 该容器的初始化方式为new vuaMatrix(numberOfRow, numberOfCol, cellValue); 与一般的二维数组使用方法类似 但是注意该容器大小在初始化的时候就定下了 不能修改行数或者列数 具体使用实例参考Unique Paths那个实例
+
+## vuaSinglyLinkedListHead vuaSinglyLinkedListHead
+  vuaSinglyLinkedListHead vuaSinglyLinkedListHead是两个单链表的相关引用类型 其原型如下
+```javascript
+  function vuaSinglyLinkedListHead(next = null) {
+    this.next = null;
+  }
+  function vuaSinglyLinkedListNode(value = 0, next = null) {
+    this.value = value;
+    this.next = null;
+  }
+```

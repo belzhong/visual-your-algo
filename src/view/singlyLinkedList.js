@@ -1,7 +1,9 @@
 import React from 'react';
 import { Rectangle, Text, ArrowedLines } from '../svg';
+import { UNSELECTED, WRITE, READ } from './color';
+import { read } from '../data_structures/type/operation_types';
 
-function SinglyLinkedList({ data, x, y, width, height, highlight }) {
+function SinglyLinkedList({ data, x, y, width, height, highlight, operation }) {
   highlight = new Set([highlight]);
   const len = data.length;
   const gap = (width - x) / (len * 2);//默认间隔的距离和一个格子长度相等
@@ -10,7 +12,7 @@ function SinglyLinkedList({ data, x, y, width, height, highlight }) {
   const rectangleHeight = min;
   const rectangleGap = min;
 
-  const rectangles = getRectangles(data, highlight, x, y, rectangleWidth, rectangleHeight, rectangleGap);
+  const rectangles = getRectangles(data, highlight, x, y, rectangleWidth, rectangleHeight, rectangleGap, operation);
   const texts = getTexts(rectangles, data);
 
   return (
@@ -36,7 +38,7 @@ function getTexts(rectangles, data) {
   return texts;
 }
 
-function getRectangles(data, highlight, x, y, width, height, gap) {
+function getRectangles(data, highlight, x, y, width, height, gap, operation) {
   const rectangles = [];
 
   for (let i = 0; i < data.length; ++i) {
@@ -47,7 +49,7 @@ function getRectangles(data, highlight, x, y, width, height, gap) {
         y={y}
         width={width}
         height={height}
-        fill={highlight.has(i) ? 'red' : '#bfa'}
+        fill={highlight.has(i) ? (operation === read ? READ : WRITE) : UNSELECTED}
       />
     );
   }
