@@ -107,12 +107,14 @@ visual your algo(下称vua)主要是用于从自定义的代码中把算法运�
   //###############################################################
 ```
 我们仅仅添加了最后两行被#包围的两行代码 其余代码与原作者保持一致
+以上代码就可以提交到vua网站观察效果了 运行效果如下
+![demo](./public/vector.gif)
 
 ## vuaMatrix
   vuaMatrix, 该容器的初始化方式为new vuaMatrix(numberOfRow, numberOfCol, cellValue); 与一般的二维数组使用方法类似 但是注意该容器大小在初始化的时候就定下了 不能修改行数或者列数 具体使用实例参考Unique Paths那个实例
 
-## vuaSinglyLinkedListHead vuaSinglyLinkedListHead
-  vuaSinglyLinkedListHead vuaSinglyLinkedListHead是两个单链表的相关引用类型 其原型如下
+## vuaSinglyLinkedListHead vuaSinglyLinkedListNode
+  vuaSinglyLinkedListHead vuaSinglyLinkedListNode是两个单链表的相关引用类型 其原型如下
 ```javascript
   function vuaSinglyLinkedListHead(next = null) {
     this.next = null;
@@ -122,3 +124,79 @@ visual your algo(下称vua)主要是用于从自定义的代码中把算法运�
     this.next = null;
   }
 ```
+  这两个类的使用很简单 正常使用就好 有两个问题需要注意的是 
+  第一 简单声明一个vuaSinglyLinkedListNode实例是无法可视化的 只有当vuaSinglyLinkedListNode接在vuaSinglyLinkedListHead上的时候 才会被显示出来 
+  第二 vuaSinglyLinkedList暂时还不支持环形链表 这是个将来会支持的功能 但现在还不支持
+  以上两个注意事项也适用于二叉树和多叉树中
+  在有了以上铺垫后 以[leetcode 2. Add Two Numbers](https://leetcode.com/problems/add-two-numbers/)来作为一个示例
+  依旧在讨论区找到一个[ac代码](https://leetcode.com/problems/add-two-numbers/discuss/1595/An-Ordinary-JavaScript-Solution)并将其稍微修改为vua能识别的样子 修改如下
+```javascript
+  var addTwoNumbers = function(l1, l2) {
+    if (l1===null) return l2;
+    if (l2===null) return l1;
+
+    //new a ListNode here, with head.next as header, pos as a pointer points to current position
+    // var head = new ListNode(0);
+    var head = new vuaSinglyLinkedListHead();
+
+    var pos = head;
+    var temp = 0;
+    while (l2!==null || l1!==null || temp>0){
+
+      //(l2!==null || l1!==null || temp>0) indicates that next digit is not null, so new a Node and move to it
+      pos.next = new vuaSinglyLinkedListNode(0);
+      pos = pos.next;
+
+      if (l1!==null){
+        temp += l1.value;
+        l1 = l1.next;
+      }
+      if (l2!==null){
+        temp += l2.value;
+        l2 = l2.next;
+      }
+
+      pos.value = temp%10;
+      temp = parseInt(temp/10);
+      //console.log(temp);
+    }
+    return head.next;
+  };
+
+  const l1 = new vuaSinglyLinkedListHead(fromArrayToLinkedList([9, 9, 9, 9, 9, 9, 9]));
+  const l2 = new vuaSinglyLinkedListHead(fromArrayToLinkedList([9, 9, 9, 9]));
+  addTwoNumbers(l1.next, l2.next);
+```
+  主要改动的地方为将vuaSinglyLinkedListHead vuaSinglyLinkedListHead引入代码并将.val改为.value 其中 我们调用了一个方法来构造单链表测试用例 fromArrayToLinkedList 该方法不是vua的容器 是一些实用方法 这些方法会在后面的文档中有详细介绍
+  以上代码就可以提交到vua网站观察效果了 运行效果如下
+  ![demo](./public/linkedList.gif)
+## vuaBinaryTreeHead vuaBinaryTreeNode
+  vuaBinaryTreeHead vuaBinaryTreeNode是两个单链表的相关引用类型 其原型如下
+```javascript
+  function vuaBinaryTreeHead(next = null) {
+    this.next = null;
+  }
+  function vuaBinaryTreeNode(value = 0, left = null, right = null) {
+    this.value = value;
+    this.left = left;
+    this.right = right;
+  }
+```
+  这两个类的使用很简单 正常使用就好 有个问题需要注意的是 简单声明一个vuaBinaryTreeNode实例是无法可视化的 只有当vuaBinaryTreeNode接在vuaBinaryTreeHead上的时候 才会被显示出来 
+  在有了以上铺垫后 以[leetcode 98. Validate Binary Search Tree](https://leetcode.com/problems/validate-binary-search-tree/)来作为一个示例
+  依旧在讨论区找到一个[ac代码](https://leetcode.com/problems/validate-binary-search-tree/discuss/529937/javascript-%3A-97-faster-simple-recursion)并将其稍微修改为vua能识别的样子 修改如下
+```javascript
+  var isValidBST = function(root, min=null, max=null) {
+    if (!root) return true;
+    if (min && root.value <= min.value) return false;
+    if (max && root.value >= max.value) return false;
+    return isValidBST(root.left, min, root) && isValidBST(root.right, root, max);
+  };
+
+  const head = new vuaBinaryTreeHead();
+  head.next = fromArrayToBinaryTree([5, 1, 4, null, null, 3, 6]);
+  isValidBST(head.next);
+```
+  主要改动的地方为将vuaBinaryTreeHead vuaBinaryTreeHead引入代码并将.val改为.value 其中 我们调用了一个方法来构造二叉树测试用例 fromArrayToBinaryTree 该方法不是vua的容器 是一些实用方法 这些方法会在后面的文档中有详细介绍
+  以上代码就可以提交到vua网站观察效果了 运行效果如下
+  ![demo](./public/binaryTree.gif)
