@@ -8,6 +8,7 @@ import { addSnapshot } from './snapshot/snapshot.js';
 function Vector() {}
 
 function isNormalInteger(str) {
+  if (typeof str === 'symbol') return false;
   const n = Math.floor(Number(str));
   return n !== Infinity && String(n) === str && n >= 0;
 }
