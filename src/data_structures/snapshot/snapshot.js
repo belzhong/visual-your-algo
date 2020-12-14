@@ -77,6 +77,7 @@ function getBinaryTreeHighlight(head, highlight) {
             pos.col = col;
             return pos;
           }
+          ++col;
           next.push([{ node: node.left,  binaryPosition: 'left'}, 
             { node: node.right,  binaryPosition: 'right'}]);
         }
