@@ -364,6 +364,11 @@ visual your algo(下称vua)主要是用于从自定义的代码中把算法运�
 
   这三个方法是把数组分别转换成 单链表/二叉树/多叉树 请注意该方法不会创造head节点 所以返回的数据需要挂在head节点上或者接在其他node节点上 至于二叉树和多叉树的数组格式与leetcode的格式保持一致
 
+## <a name='get'>getRandomInteger getRandomIntegerArray</a>
+
+  getRandomInteger(lo, hi); 得到一个在区间[lo, hi)这个区间的整数 其中lo hi也得是整数
+  getRandomInteger(n, lo = 0, hi = n * 10); 得到一个大小为n的一个数组 其中元素为在区间[lo, hi)这个区间的整数 其中lo hi也得是整数 且有默认参数
+
 ## <a name='set'>vuaSet vuaMap</a>
 
   在声明的时候使用如下声明方法
