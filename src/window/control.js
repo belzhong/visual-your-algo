@@ -25,7 +25,7 @@ function Control(props) {
     showUploadList: false,
     onChange(info) {
       if (info.file.status === 'done') {
-        // message.success(`${info.file.name} file uploaded successfully`);
+        message.success(`${info.file.name} file uploaded successfully`);
         const response = info.file.response;
         dispatch(setSnapshots(response));
       } else if (info.file.status === 'error') {
