@@ -10,7 +10,8 @@
   >5. [多叉树](#maryTree)
   >6. [递归](#recursion)
   >7. [fromArray方法](#from)
-  >8. [Set Map](#set)
+  >8. [随机数方法](#get)
+  >9. [Set Map](#set)
 
 [注意事项](#notices)
 
