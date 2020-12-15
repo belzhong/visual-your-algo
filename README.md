@@ -1,4 +1,5 @@
 [简介](#intro)
+[使用说明](#instruction)
 [API](#api)
   >1. [一维数组(向量)](#vector)
   >2. [二维数组(矩阵)](#matrix)
@@ -70,6 +71,10 @@ visual your algo(下称vua)主要是用于从自定义的代码中把算法运�
 ```
 以上代码就可以提交到vua网站观察效果了 运行效果如下
 ![demo](./public/demo.gif)
+
+# <a name='instruction'>使用说明</a>
+
+[本网站](http://139.224.73.43/)主要说明下面两个进度条上面那根是控制进度的 下面那个根是控制速度的 其他的地方都是很显而易见的 不做解释
 
 # <a name='api'>api</a>
 
