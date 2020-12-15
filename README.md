@@ -368,6 +368,7 @@ visual your algo(下称vua)主要是用于从自定义的代码中把算法运�
 ## <a name='get'>getRandomInteger getRandomIntegerArray</a>
 
   getRandomInteger(lo, hi); 得到一个在区间[lo, hi)这个区间的整数 其中lo hi也得是整数
+
   getRandomInteger(n, lo = 0, hi = n * 10); 得到一个大小为n的一个数组 其中元素为在区间[lo, hi)这个区间的整数 其中lo hi也得是整数 且有默认参数
 
 ## <a name='set'>vuaSet vuaMap</a>
