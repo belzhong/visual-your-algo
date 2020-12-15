@@ -1,4 +1,18 @@
-# visual your algo
+[简介](#intro)
+[API](#api)
+  >1. [一维数组(向量)](#vector)
+  >2. [二维数组(矩阵)](#matrix)
+  >3. [单链表](#linkedList)
+  >4. [二叉树](#binaryTree)
+  >5. [多叉树](#maryTree)
+  >6. [递归](#recursion)
+  >7. [fromArray方法](#from)
+  >8. [Set Map](#set)
+
+[注意事项](#notices)
+
+
+# <a id='name'> visual your algo </a>
 visual your algo(下称vua)主要是用于从自定义的代码中把算法运行过程可视化地展示出来,与同类型网站[Algorithm Visualizer](https://github.com/algorithm-visualizer/algorithm-visualizer)相比，vua最大的优点在于使用简单,相比于Algorithm Visualizer需要在代码中显示地调用可视化的代码,vua自动化地记录代码的运行过程,这使得很容易把现有的代码修改为可被vua处理的代码
 
 以[leetcode 62. Unique Paths](https://leetcode.com/problems/unique-paths/)为例来演示整个系统的用法
@@ -57,9 +71,9 @@ visual your algo(下称vua)主要是用于从自定义的代码中把算法运�
 以上代码就可以提交到vua网站观察效果了 运行效果如下
 ![demo](./public/demo.gif)
 
-# API
+# <a name='api'>api</a>
 
-## vuaVector
+## <a name='vector'>vuaVector</a>
   vuaVector, 该容器实际上是Array类型加了代理后得到的 所以该容器可以当成Array来用 其初始化方法也和Array类型一致 但是该方法仅支持使用new初始化 这个容器以[TopK问题作为例子](https://leetcode-cn.com/problems/zui-xiao-de-kge-shu-lcof/) 我们将该题的一个[ac代码](https://xxoo521.com/2020-02-21-least-nums/)重写为以下形式
 ```javascript
   function partiton(arr, start, end) {
@@ -110,10 +124,10 @@ visual your algo(下称vua)主要是用于从自定义的代码中把算法运�
 以上代码就可以提交到vua网站观察效果了 运行效果如下
 ![demo](./public/vector.gif)
 
-## vuaMatrix
+## <a name='matrix'>vuaMatrix</a>
   vuaMatrix, 该容器的初始化方式为new vuaMatrix(numberOfRow, numberOfCol, cellValue); 与一般的二维数组使用方法类似 但是注意该容器大小在初始化的时候就定下了 不能修改行数或者列数 具体使用实例参考Unique Paths那个实例
 
-## vuaSinglyLinkedListHead vuaSinglyLinkedListNode
+## <a name='linkedList'>vuaSinglyLinkedListHead vuaSinglyLinkedListNode</a>
   vuaSinglyLinkedListHead vuaSinglyLinkedListNode是两个单链表的相关引用类型 其原型如下
 ```javascript
   function vuaSinglyLinkedListHead(next = null) {
@@ -170,7 +184,7 @@ visual your algo(下称vua)主要是用于从自定义的代码中把算法运�
   主要改动的地方为将vuaSinglyLinkedListHead vuaSinglyLinkedListHead引入代码并将.val改为.value 其中 我们调用了一个方法来构造单链表测试用例 fromArrayToLinkedList 该方法不是vua的容器 是一个vua提供的一个方法 这个方法会在后面的文档中有详细介绍
   以上代码就可以提交到vua网站观察效果了 运行效果如下
   ![demo](./public/linkedList.gif)
-## vuaBinaryTreeHead vuaBinaryTreeNode
+## <a name='binaryTree'>vuaBinaryTreeHead vuaBinaryTreeNode</a>
   vuaBinaryTreeHead vuaBinaryTreeNode是两个二叉树的相关引用类型 其原型如下
 ```javascript
   function vuaBinaryTreeHead(next = null) {
@@ -201,7 +215,7 @@ visual your algo(下称vua)主要是用于从自定义的代码中把算法运�
   以上代码就可以提交到vua网站观察效果了 运行效果如下
   ![demo](./public/binaryTree.gif)
 
-## vuaMAryTreeHead vuaMAryTreeNode
+## <a name='maryTree'>vuaMAryTreeHead vuaMAryTreeNode</a>
   vuaMAryTreeHead vuaMAryTreeNode是两个多叉树的相关引用类型 其原型如下
 ```javascript
   function vuaMAryTreeHead(next = null) {
@@ -215,6 +229,7 @@ visual your algo(下称vua)主要是用于从自定义的代码中把算法运�
   这两个类的使用很简单 正常使用就好 有两个问题需要注意的是 
   1. 简单声明一个vuaMAryTreeNode实例是无法可视化的 只有当vuaMAryTreeNode接在vuaMAryTreeHead上的时候 才会被显示出来 
   2. 多叉树的子节点实现方式在这里采用的是用数组来存储的 而不是儿子-兄弟的存储方法 所以Array里的push等方法在chilren里也是可以用的
+
     在有了以上铺垫后 以[leetcode 559. Maximum Depth of N-ary Tree](https://leetcode.com/problems/maximum-depth-of-n-ary-tree/)来作为一个示例
     依旧在讨论区找到一个[ac代码](https://leetcode.com/problems/maximum-depth-of-n-ary-tree/discuss/374244/Javascript-recursive-solution)并将其稍微修改为vua能识别的样子 修改如下
 ```javascript
@@ -241,7 +256,7 @@ visual your algo(下称vua)主要是用于从自定义的代码中把算法运�
   以上代码就可以提交到vua网站观察效果了 运行效果如下
   ![demo](./public/maryTree.gif)
 
-## addListener
+## <a name='recursion'>addListener</a>
   addListener并不是一个容器 而是一个方法 他可以用来可视化递归栈的一个调用过程 因为本质上来说 任何递归调用的过程都可以画成一个多叉树的过程 使用方法也很简单 如下所示
 ```javascript
   function functionName(/*parameters*/) {
@@ -279,10 +294,18 @@ visual your algo(下称vua)主要是用于从自定义的代码中把算法运�
   这段代码也说明了本网站支持多个数据类型同时出现在同一个屏幕上
   理论上来说本网站并不限制数据类型数量 完全可以做到把所有数据类型放在同一个屏幕上展示 当然 很乱就是了
 
-## fromArrayToLinkedList fromArrayToBinaryTree fromArrayToMAryTree
+## <a name='from'>fromArrayToLinkedList fromArrayToBinaryTree fromArrayToMAryTree</a>
   这三个方法是把数组分别转换成 单链表/二叉树/多叉树 请注意该方法不会创造head节点 所以返回的数据需要挂在head节点上或者接在其他node节点上 至于二叉树和多叉树的数组格式与leetcode的格式保持一致
 
-# 需要注意的问题
+## <a name='set'>vuaSet vuaMap</a>
+  在声明的时候使用如下声明方法
+```javascript
+  new vuaSet();
+  new vuaMap();
+```
+  其他使用方法与js的Set和Map不变 过于简单 不多做解释 懂的都懂
+
+# <a name='notices'>需要注意的问题</a>
 
 1. 目前只支持js语言 其他语言以后大概可能会支持⑧
 
