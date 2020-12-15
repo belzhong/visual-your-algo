@@ -215,8 +215,8 @@ visual your algo(下称vua)主要是用于从自定义的代码中把算法运�
   这两个类的使用很简单 正常使用就好 有两个问题需要注意的是 
   1. 简单声明一个vuaMAryTreeNode实例是无法可视化的 只有当vuaMAryTreeNode接在vuaMAryTreeHead上的时候 才会被显示出来 
   2. 多叉树的子节点实现方式在这里采用的是用数组来存储的 而不是儿子-兄弟的存储方法 所以Array里的push等方法在chilren里也是可以用的
-  在有了以上铺垫后 以[leetcode 559. Maximum Depth of N-ary Tree](https://leetcode.com/problems/maximum-depth-of-n-ary-tree/)来作为一个示例
-  依旧在讨论区找到一个[ac代码](https://leetcode.com/problems/maximum-depth-of-n-ary-tree/discuss/374244/Javascript-recursive-solution)并将其稍微修改为vua能识别的样子 修改如下
+    在有了以上铺垫后 以[leetcode 559. Maximum Depth of N-ary Tree](https://leetcode.com/problems/maximum-depth-of-n-ary-tree/)来作为一个示例
+    依旧在讨论区找到一个[ac代码](https://leetcode.com/problems/maximum-depth-of-n-ary-tree/discuss/374244/Javascript-recursive-solution)并将其稍微修改为vua能识别的样子 修改如下
 ```javascript
   var maxDepth = function(root) {
     root.value;
@@ -240,3 +240,39 @@ visual your algo(下称vua)主要是用于从自定义的代码中把算法运�
   其中在maxDepth中加入了一个root.value一句 这句是必须的 这是为了启动多叉树的高亮
   以上代码就可以提交到vua网站观察效果了 运行效果如下
   ![demo](./public/maryTree.gif)
+
+## addListener
+  addListener并不是一个容器 而是一个方法 他可以用来可视化递归栈的一个调用过程 因为本质上来说 任何递归调用的过程都可以画成一个多叉树的过程 使用方法也很简单 如下所示
+```javascript
+  function functionName(/*parameters*/) {
+    //body
+  }
+  functionName = addListener(functionName);
+```
+  然后functionName该怎么用怎么用 不过有个需要注意的问题是 必须对functionName进行覆盖 而不是用另一个变量名来承接addListener的返回值 不然的话functionName函数体内部的递归调用就无法被探测到
+  在有了以上铺垫后 我们还以[leetcode 559. Maximum Depth of N-ary Tree](https://leetcode.com/problems/maximum-depth-of-n-ary-tree/)来作为一个示例, 就是上面那个例子再重用一下 因为作者并不想再去找另一个例子了
+  依旧在讨论区找到一个[ac代码](https://leetcode.com/problems/maximum-depth-of-n-ary-tree/discuss/374244/Javascript-recursive-solution)并将其稍微修改为vua能识别的样子 修改如下
+```javascript
+  var maxDepth = function(root) {
+    root.value;
+    if (root == null) {
+      return 0;
+    }
+
+    let max = 0;
+    for (let child of root.children) {
+      max = Math.max(max, maxDepth(child));
+    }
+
+    return max + 1;
+  };
+  const data = [1, null, 2, 3, 4, 5, null, null, 6, 7, null, 8, null, 9, 10, null, null, 11, null, 12, null, 13, null, null, 14];
+  const head = new vuaMAryTreeHead();
+  head.next = fromArrayToMAryTree(data);
+  maxDepth = addListener(maxDepth);//########
+  maxDepth(head.next);
+```
+  在这段代码里 仅在倒数第二段添加了一行代码 其他的不变
+  以上代码就可以提交到vua网站观察效果了 运行效果如下
+  ![demo](./public/recursion.gif)
+  可以看到在最后递归生成的树就是和原本树的形状是一样的 这也就是遍历树的时候递归调用栈的一个过程
