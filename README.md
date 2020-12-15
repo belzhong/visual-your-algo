@@ -167,11 +167,11 @@ visual your algo(下称vua)主要是用于从自定义的代码中把算法运�
   const l2 = new vuaSinglyLinkedListHead(fromArrayToLinkedList([9, 9, 9, 9]));
   addTwoNumbers(l1.next, l2.next);
 ```
-  主要改动的地方为将vuaSinglyLinkedListHead vuaSinglyLinkedListHead引入代码并将.val改为.value 其中 我们调用了一个方法来构造单链表测试用例 fromArrayToLinkedList 该方法不是vua的容器 是一些实用方法 这些方法会在后面的文档中有详细介绍
+  主要改动的地方为将vuaSinglyLinkedListHead vuaSinglyLinkedListHead引入代码并将.val改为.value 其中 我们调用了一个方法来构造单链表测试用例 fromArrayToLinkedList 该方法不是vua的容器 是一个vua提供的一个方法 这个方法会在后面的文档中有详细介绍
   以上代码就可以提交到vua网站观察效果了 运行效果如下
   ![demo](./public/linkedList.gif)
 ## vuaBinaryTreeHead vuaBinaryTreeNode
-  vuaBinaryTreeHead vuaBinaryTreeNode是两个单链表的相关引用类型 其原型如下
+  vuaBinaryTreeHead vuaBinaryTreeNode是两个二叉树的相关引用类型 其原型如下
 ```javascript
   function vuaBinaryTreeHead(next = null) {
     this.next = null;
@@ -197,6 +197,46 @@ visual your algo(下称vua)主要是用于从自定义的代码中把算法运�
   head.next = fromArrayToBinaryTree([5, 1, 4, null, null, 3, 6]);
   isValidBST(head.next);
 ```
-  主要改动的地方为将vuaBinaryTreeHead vuaBinaryTreeHead引入代码并将.val改为.value 其中 我们调用了一个方法来构造二叉树测试用例 fromArrayToBinaryTree 该方法不是vua的容器 是一些实用方法 这些方法会在后面的文档中有详细介绍
+  主要改动的地方为将vuaBinaryTreeHead vuaBinaryTreeHead引入代码并将.val改为.value 其中 我们调用了一个方法来构造二叉树测试用例 fromArrayToBinaryTree 该方法不是vua的容器 是一个vua提供的一个方法 这个方法会在后面的文档中有详细介绍
   以上代码就可以提交到vua网站观察效果了 运行效果如下
   ![demo](./public/binaryTree.gif)
+
+## vuaMAryTreeHead vuaMAryTreeNode
+  vuaMAryTreeHead vuaMAryTreeNode是两个多叉树的相关引用类型 其原型如下
+```javascript
+  function vuaMAryTreeHead(next = null) {
+    this.next = null;
+  }
+  function vuaMAryTreeNode(value = 0) {
+    this.value = value;
+    this.children = [];
+  }
+```
+  这两个类的使用很简单 正常使用就好 有两个问题需要注意的是 
+  1. 简单声明一个vuaMAryTreeNode实例是无法可视化的 只有当vuaMAryTreeNode接在vuaMAryTreeHead上的时候 才会被显示出来 
+  2. 多叉树的子节点实现方式在这里采用的是用数组来存储的 而不是儿子-兄弟的存储方法 所以Array里的push等方法在chilren里也是可以用的
+  在有了以上铺垫后 以[leetcode 559. Maximum Depth of N-ary Tree](https://leetcode.com/problems/maximum-depth-of-n-ary-tree/)来作为一个示例
+  依旧在讨论区找到一个[ac代码](https://leetcode.com/problems/maximum-depth-of-n-ary-tree/discuss/374244/Javascript-recursive-solution)并将其稍微修改为vua能识别的样子 修改如下
+```javascript
+  var maxDepth = function(root) {
+    root.value;
+    if (root == null) {
+      return 0;
+    }
+
+    let max = 0;
+    for (let child of root.children) {
+      max = Math.max(max, maxDepth(child));
+    }
+
+    return max + 1;
+  };
+  const data = [1, null, 2, 3, 4, 5, null, null, 6, 7, null, 8, null, 9, 10, null, null, 11, null, 12, null, 13, null, null, 14];
+  const head = new vuaMAryTreeHead();
+  head.next = fromArrayToMAryTree(data);
+  maxDepth(head.next);
+```
+  主要改动的地方为将vuaMAryTreeHead vuaMAryTreeHead引入代码并将.val改为.value 其中 我们调用了一个方法来构造多叉树测试用例 fromArrayToMAryTree 该方法不是vua的容器 是一个vua提供的一个方法 这个方法会在后面的文档中有详细介绍
+  其中在maxDepth中加入了一个root.value一句 这句是必须的 这是为了启动多叉树的高亮
+  以上代码就可以提交到vua网站观察效果了 运行效果如下
+  ![demo](./public/maryTree.gif)
