@@ -5,3 +5,4 @@ export const START = 'START';
 export const SET_SNAPSHOTS = 'SET_SNAPSHOTS';
 export const SET_HANDLER = 'SET_HANDLER';
 export const SET_SPEED = 'SET_SPEED';
+export const SET_PANEL_WIDTH_PARAMETERS = 'SET_PANEL_WIDTH_PARAMETERS';

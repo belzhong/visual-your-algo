@@ -14,3 +14,12 @@
   float: right;
   margin: 16px 0 16px 24px;
 }
+
+#control-panel:after {
+  content: "";
+  height: 0;
+  clear: both;
+  overflow: hidden;
+  display: block;
+  visibility: hidden;
+}

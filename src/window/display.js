@@ -40,7 +40,7 @@ function Display({snapshot, width, x, y}) {
       </svg>
       <div 
         style={{width:width}}
-        id='control'>
+        id='control-panel'>
         <Control/>
       </div>
     </>

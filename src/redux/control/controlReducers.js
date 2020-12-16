@@ -5,7 +5,8 @@ import {
   STOP,
   SET_SNAPSHOTS,
   SET_HANDLER,
-  SET_SPEED
+  SET_SPEED,
+  SET_PANEL_WIDTH_PARAMETERS
 } from './controlTypes';
 
 const initialState = {
@@ -14,11 +15,23 @@ const initialState = {
   playerHandler: null,
   speed: 30,
   playing: false,
-  handler: null
+  handler: null,
+  progressWidth: 0,
+  speedWidth: 0
 };
 
 const controlReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SET_PANEL_WIDTH_PARAMETERS: {
+      const {panelWidth, uploadPart} = action;
+      console.log('action is', action);
+      const width = (panelWidth - uploadPart) / 2 - 3;
+      return {
+        ...state,
+        progressWidth: width,
+        speedWidth: width
+      }
+    }
     case SET_SPEED: {
       return {
         ...state,

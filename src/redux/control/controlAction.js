@@ -5,8 +5,17 @@ import {
   STOP, 
   SET_SNAPSHOTS, 
   SET_HANDLER, 
-  SET_SPEED 
+  SET_SPEED,
+  SET_PANEL_WIDTH_PARAMETERS
 } from './controlTypes';
+
+export const setPanelWidthParameters = (panelWidth, uploadPart) => {
+  return {
+    type: SET_PANEL_WIDTH_PARAMETERS,
+    panelWidth,
+    uploadPart
+  };
+}
 
 export const setSpeed = (value) => {
   return {

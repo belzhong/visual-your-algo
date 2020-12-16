@@ -2,13 +2,16 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Display from './display';
 import { 
-  resize
+  resize,
+  setPanelWidthParameters
 } from '../redux';
 
 function fitScreen(dispatch) {
-  const control = document.getElementById('control');
-  const offsetHeight = control === null ? 0 : control.offsetHeight;
-  dispatch(resize(window.innerWidth - 20, window.innerHeight - offsetHeight - 20));
+  const controlPanel = document.getElementById('control-panel');
+  const offsetHeight = (controlPanel === null ? 0 : controlPanel.offsetHeight);
+  const controlUploadStep = document.getElementById('control-upload-step');
+  dispatch(setPanelWidthParameters(controlPanel.offsetWidth, controlUploadStep.offsetWidth));
+  dispatch(resize(window.innerWidth, window.innerHeight - offsetHeight - 10));
 }
 
 function Panel() {
